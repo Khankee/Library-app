@@ -11,7 +11,7 @@ public class StudentService {
     @Autowired
     private StudentRepository studentRepository;
 
-    public Optional<Student> getStudent(String id){
+    public Optional<Student> getStudent(long id){
         return studentRepository.findById(id);
     }
 
@@ -19,11 +19,7 @@ public class StudentService {
         studentRepository.save(student);
     }
 
-    public void deleteStudent(String id) {
+    public void deleteStudent(long id) {
         studentRepository.deleteById(id);
-    }
-
-    public void updateTopic(String id, Student student) {
-        studentRepository.save(student);
     }
 }

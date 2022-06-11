@@ -1,37 +1,60 @@
 package samgau.holding.libraryapp.student;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
-
-@RestController
+//This is StudentController class which handles all main edit/add/delete methods
+@Controller
 public class StudentController {
 
     @Autowired
     private StudentService studentService;
 
-    //GET DEFAULT METHOD OF SPECIFIC ONE
-    @RequestMapping("/students/{id}")
-    public Optional<Student> getStudent(@PathVariable String id){
-        return studentService.getStudent(id);
-    }
+    @Autowired
+    private StudentRepository studentRepository;
 
-    /*//POST METHOD (Create value)
-    @RequestMapping(method = RequestMethod.POST, value = "/students")
-    public void addStudent(@RequestBody Student student){
+    //CREATE method
+    @PostMapping( "/addstudent")
+    public String addStudent(@Validated Student student, BindingResult result, Model model){
+        if (result.hasErrors()) {
+            return "add-student";
+        }
         studentService.addStudent(student);
-    }*/
-
-    //DELETE METHOD (Remove the value)
-    @RequestMapping(method = RequestMethod.DELETE, value = "students/{id}")
-    public void deleteStudent(@PathVariable String id){
-        studentService.deleteStudent(id);
+        return "redirect:/index";
     }
 
-    //PUT METHOD (Update the value)
-    @RequestMapping(method = RequestMethod.PUT, value = "/students/{id}")
-    public void updateStudent(@RequestBody Student student, @PathVariable String id ){
-        studentService.updateTopic(id, student);
+    //READ method
+    @GetMapping("/edit/{id}")
+    public String showStudent(@PathVariable("id") long id, Model model){
+
+        Student student = studentService.getStudent(id).
+                orElseThrow(() -> new IllegalArgumentException("Invalid Student id" + id));
+
+        model.addAttribute("student", student);
+        return "update-student";
+    }
+
+    //UPDATE method
+    @PostMapping("/update/{id}")
+    public String updateUser(@PathVariable("id") long id, @Validated Student student,
+                             BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            student.setId(id);
+            return "update-student";
+        }
+
+        studentRepository.save(student);
+        return "redirect:/index";
+    }
+
+    //DELETE method
+    @GetMapping("/delete/{id}")
+    public String deleteUser(@PathVariable("id") long id, Model model) {
+        studentService.deleteStudent(id);
+        return "redirect:/index";
     }
 }

@@ -6,17 +6,29 @@
         <title>Main page</title>
     </head>
     <body>
-        <form th:action = @{/addstudent} method="post">
-            <td><label for="name">Student Name</label></td>
-            <td><input type="text" id="name" name="name"></td>
-            <td><input type="submit" value="Submit"></td>
-        </form>
-        <!--<table>
-            <tr>
-                <td><h4>Student Name:</h4></td>
-                <td><h4 th:text="${student.name}"></h4></td>
-            </tr>
-        </table>-->
+        <div th:switch="${students}">
+            <h2 th:case="null">No Students yet!</h2>
+            <div th:case="*">
+                <h2>Students</h2>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="student : ${students}">
+                        <td th:text="${student.name}"></td>
+                        <td><a th:href="@{/edit/{id}(id=${student.id})}">Edit</a></td>
+                        <td><a th:href="@{/delete/{id}(id=${student.id})}">Delete</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p><a href="/signup">Add a new user</a></p>
+        </div>
 
     </body>
 </html>

@@ -4,25 +4,26 @@ package samgau.holding.libraryapp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import samgau.holding.libraryapp.student.Student;
-import samgau.holding.libraryapp.student.StudentService;
+import samgau.holding.libraryapp.student.StudentRepository;
 
 @Controller
 public class MainController {
-    @GetMapping("/")
-    public String home(){
+
+    @Autowired
+    private StudentRepository studentRepository;
+
+    @GetMapping("/signup")
+    public String showSignUpForm(Student student) {
+        return "add-student";
+    }
+
+    @GetMapping("/index")
+    public String showUserList(Model model) {
+        model.addAttribute("students", studentRepository.findAll());
         return "index";
     }
 
-    @Autowired
-    private StudentService studentService2;
 
-    @PostMapping( "/addstudent")
-    public String addStudent(@Validated Student student, Model model){
-        studentService2.addStudent(student);
-
-        return "redirect:/";
-    }
 }
