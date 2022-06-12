@@ -25,7 +25,9 @@ public class MainController {
     }
 
     @GetMapping("/createbook")
-    public String showFormBooks(Book book){
+    public String showFormBooks(Model model){
+        model.addAttribute("book", new Book());
+        model.addAttribute("listStudents", studentRepository.findAll());
         return "add-book";
     }
 

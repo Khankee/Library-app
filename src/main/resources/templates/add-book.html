@@ -2,15 +2,24 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Add Student</title>
+    <title>Add Book</title>
 </head>
 <body>
-<form th:action = @{/addbook} method="post">
-    <td><label for="name">Book Name</label></td>
-    <td><input type="text" id="name" name="name"></td>
+<form th:action = @{/addbook} th:object="${book}" method="post">
+    <td><label>Book Name:</label></td>
+    <td><input type="text" th:field="*{name}" required></td>
 
-    <td><label for="price">Book Price</label></td>
-    <td><input type="text" id="price" name="price"></td>
+    <td><label>Book Price:</label></td>
+    <td><input type="number" step = "0" th:field="*{price}" required></td>
+
+    <td><label>Students:</label></td>
+    <td>
+        <select th:field="*{student}">
+            <th:block th:each="stud : ${listStudents}">
+                <option th:text="${stud.name}" th:value="${stud.id}"/>
+            </th:block>
+        </select>
+    </td>
 
     <td><input type="submit" value="Submit"></td>
 </form>

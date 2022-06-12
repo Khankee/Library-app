@@ -22,4 +22,8 @@ public class BookService {
     public void deleteBook(long id) {
         bookRepository.deleteById(id);
     }
+
+    public Long sumPrice(){
+        return bookRepository.sumPrice();
+    }
 }

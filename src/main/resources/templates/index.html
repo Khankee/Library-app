@@ -9,10 +9,11 @@
         <div th:switch="${students}">
             <h2 th:case="null">No Students yet!</h2>
             <div th:case="*">
-                <h2>Students</h2>
+                <h2>Student List</h2>
                 <table>
                     <thead>
                     <tr>
+                        <th>Id</th>
                         <th>Name</th>
                         <th>Edit</th>
                         <th>Delete</th>
@@ -20,9 +21,10 @@
                     </thead>
                     <tbody>
                     <tr th:each="student : ${students}">
+                        <td th:text="${student.id}"></td>
                         <td th:text="${student.name}"></td>
-                        <td><a th:href="@{/edit/{id}(id=${student.id})}">Edit</a></td>
-                        <td><a th:href="@{/delete/{id}(id=${student.id})}">Delete</a></td>
+                        <td><a th:href="@{/editstudent/{id}(id=${student.id})}">Edit</a></td>
+                        <td><a th:href="@{/deletestudent/{id}(id=${student.id})}">Delete</a></td>
                     </tr>
                     </tbody>
                 </table>
@@ -37,16 +39,20 @@
                 <table>
                     <thead>
                     <tr>
+                        <th>Id</th>
                         <th>Name</th>
+                        <th>Price</th>
                         <th>Edit</th>
                         <th>Delete</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr th:each="book : ${books}">
+                        <td th:text="${book.id}"></td>
                         <td th:text="${book.name}"></td>
-                        <!--<td><a th:href="@{/edit/{id}(id=${student.id})}">Edit</a></td>
-                        <td><a th:href="@{/delete/{id}(id=${student.id})}">Delete</a></td>-->
+                        <td th:text="${book.price}"></td>
+                        <td><a th:href="@{/edit/{id}(id=${book.id})}">Edit</a></td>
+                        <td><a th:href="@{/delete/{id}(id=${book.id})}">Delete</a></td>
                     </tr>
                     </tbody>
                 </table>

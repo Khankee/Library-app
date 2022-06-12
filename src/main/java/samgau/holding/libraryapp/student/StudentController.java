@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import samgau.holding.libraryapp.book.BookRepository;
 
 //This is StudentController class which handles all main edit/add/delete methods
 @Controller
@@ -16,6 +17,8 @@ public class StudentController {
 
     @Autowired
     private StudentRepository studentRepository;
+
+    private BookRepository bookRepo;
 
     //CREATE method
     @PostMapping( "/addstudent")
@@ -28,7 +31,7 @@ public class StudentController {
     }
 
     //READ method
-    @GetMapping("/edit/{id}")
+    @GetMapping("/editstudent/{id}")
     public String showStudent(@PathVariable("id") long id, Model model){
 
         Student student = studentService.getStudent(id).
@@ -39,9 +42,9 @@ public class StudentController {
     }
 
     //UPDATE method
-    @PostMapping("/update/{id}")
-    public String updateUser(@PathVariable("id") long id, @Validated Student student,
-                             BindingResult result, Model model) {
+    @PostMapping("/updatestudent/{id}")
+    public String updateStudent(@PathVariable("id") long id, @Validated Student student,
+                                BindingResult result, Model model) {
         if (result.hasErrors()) {
             student.setId(id);
             return "update-student";
@@ -52,8 +55,8 @@ public class StudentController {
     }
 
     //DELETE method
-    @GetMapping("/delete/{id}")
-    public String deleteUser(@PathVariable("id") long id, Model model) {
+    @GetMapping("/deletestudent/{id}")
+    public String deleteStudent(@PathVariable("id") long id, Model model) {
         studentService.deleteStudent(id);
         return "redirect:/index";
     }
