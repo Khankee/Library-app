@@ -1,9 +1,9 @@
 package samgau.holding.libraryapp.student;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import samgau.holding.libraryapp.book.Book;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Student {
@@ -12,6 +12,10 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String name;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "student_id")
+    private List<Book> books;
     public Student() {
     }
 
@@ -21,6 +25,13 @@ public class Student {
         this.name = name;
     }
 
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
+    }
 
     public long getId() {
         return id;
@@ -43,6 +54,7 @@ public class Student {
         return "Student{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", books=" + books +
                 '}';
     }
 }

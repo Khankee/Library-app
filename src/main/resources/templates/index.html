@@ -27,7 +27,31 @@
                     </tbody>
                 </table>
             </div>
-            <p><a href="/signup">Add a new user</a></p>
+            <p><a href="/createstudent">Add a new student</a></p>
+        </div>
+
+        <div th:switch="${books}">
+            <h2 th:case="null">No Books yet!</h2>
+            <div th:case="*">
+                <h2>Books</h2>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="book : ${books}">
+                        <td th:text="${book.name}"></td>
+                        <!--<td><a th:href="@{/edit/{id}(id=${student.id})}">Edit</a></td>
+                        <td><a th:href="@{/delete/{id}(id=${student.id})}">Delete</a></td>-->
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p><a href="/createbook">Add a new Book</a></p>
         </div>
 
     </body>

@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import samgau.holding.libraryapp.book.Book;
+import samgau.holding.libraryapp.book.BookRepository;
 import samgau.holding.libraryapp.student.Student;
 import samgau.holding.libraryapp.student.StudentRepository;
 
@@ -14,14 +16,23 @@ public class MainController {
     @Autowired
     private StudentRepository studentRepository;
 
-    @GetMapping("/signup")
-    public String showSignUpForm(Student student) {
+    @Autowired
+    private BookRepository bookRepository;
+
+    @GetMapping("/createstudent")
+    public String showFormStudents(Student student) {
         return "add-student";
     }
 
+    @GetMapping("/createbook")
+    public String showFormBooks(Book book){
+        return "add-book";
+    }
+
     @GetMapping("/index")
-    public String showUserList(Model model) {
+    public String showStudentList(Model model) {
         model.addAttribute("students", studentRepository.findAll());
+        model.addAttribute("books", bookRepository.findAll());
         return "index";
     }
 
