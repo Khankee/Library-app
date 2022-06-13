@@ -18,5 +18,6 @@ Dear reader, before you start reading and judging my application, I have to chec
 
 ## Screenshots of the app
 <p align="center">
-  <img width="460" height="300" src =https://github.com/Khanspii/Library-app/Screenshots/FirstPNG.png/>
+  <img width="460" height="300" src =https://https://github.com/Khankee/Library-app/blob/master/Screenshots/FirstPNG.PNG/>
 </p>
+
