@@ -17,6 +17,3 @@ Dear reader, before you start reading and judging my application, I have to chec
 5. You are ready to launch the program.
 
 ## Screenshots of the app are available in the folder with images
-
-[My images](Khankee.github.com/Library-app/Screenshots/)
-
