@@ -6,6 +6,7 @@
 </head>
 <body>
 <form th:action = @{/addbook} th:object="${book}" method="post">
+    <input type="hidden" th:field="*{id}" th:value="${book.id}">
     <td><label>Book Name:</label></td>
     <td><input type="text" th:field="*{name}" required></td>
 

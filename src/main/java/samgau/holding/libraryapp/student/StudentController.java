@@ -8,6 +8,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import samgau.holding.libraryapp.book.BookRepository;
 
+import java.util.Optional;
+
 //This is StudentController class which handles all main edit/add/delete methods
 @Controller
 public class StudentController {
@@ -18,6 +20,7 @@ public class StudentController {
     @Autowired
     private StudentRepository studentRepository;
 
+    @Autowired
     private BookRepository bookRepo;
 
     //CREATE method
@@ -59,5 +62,16 @@ public class StudentController {
     public String deleteStudent(@PathVariable("id") long id, Model model) {
         studentService.deleteStudent(id);
         return "redirect:/index";
+    }
+
+    //Price counting
+    @GetMapping("/counttotalbook/{id}")
+    public String countTotalPrice(@PathVariable("id") long id, Model model){
+        long sum = bookRepo.getTotalPrice(id);
+        String name = String.valueOf(studentRepository.findById(id).get().getName());
+        System.out.println(name);
+        model.addAttribute("studentname", name);
+        model.addAttribute("sum", sum);
+        return "total-price";
     }
 }

@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface BookRepository extends CrudRepository<Book, Long> {
-    @Query(value = "SELECT sum(price) FROM Book", nativeQuery = true)
-    Long sumPrice();
+    @Query(value = "SELECT sum(price) FROM librarydb.books where student_id = ?1", nativeQuery = true)
+    long getTotalPrice(long id);
 }
