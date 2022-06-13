@@ -16,8 +16,7 @@ Dear reader, before you start reading and judging my application, I have to chec
 4. Wait until POM.xml updates all dependencies.
 5. You are ready to launch the program.
 
-## Screenshots of the app
-<p align="center">
-  <img width="460" height="300" src =https://https://github.com/Khankee/Library-app/blob/master/Screenshots/FirstPNG.PNG/>
-</p>
+## Screenshots of the app are available in the folder with images
+
+[My images](Khankee.github.com/Library-app/Screenshots/)
 
