@@ -1,10 +1,9 @@
-# Library application for Samgau holding company
+# Library application
 
 Dear reader, before you start reading and judging my application, I have to check list main requirements that I have done.
 + Create Student and Book models - [Done]
 + Add CRUD operations for all models - [Done]
 + Create One-To-Many relationship between Student and Book - [Done]
-+ Make special bookshelf to connect books - [Failed]
 + Create total sum of the books owning the student - [Done]
 + Create README file and tell how to launch this project - [Done]
 
